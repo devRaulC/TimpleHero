@@ -12,7 +12,7 @@ public class NoteMovement : MonoBehaviour
         this.transform.Translate(Vector3.left * 10 * Time.deltaTime);
 
         if (xPos <= -20.0f) {
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
         } 
     }
 
