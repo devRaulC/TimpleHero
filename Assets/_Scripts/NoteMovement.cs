@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class NoteMovement : MonoBehaviour
 {
-    private float xPos;
+    private float xSpeed = 10.0f;
 
     void Update()
     {
-        xPos = this.transform.position.x;
-        this.transform.Translate(Vector3.left * 10 * Time.deltaTime);
-
-        if (xPos <= -20.0f) {
-            //Destroy(this.gameObject);
-        } 
+        this.transform.Translate(Vector3.left * xSpeed * Time.deltaTime);
     }
 
 }

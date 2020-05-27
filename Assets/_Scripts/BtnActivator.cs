@@ -8,11 +8,11 @@ public class BtnActivator : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 {
 
     private bool isActive = false;
-    private Points pointScript;
+    private GameManager gameManager;
 
     private void Start()
     {
-        pointScript = GameObject.Find("Points").GetComponent<Points>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
 
@@ -20,8 +20,8 @@ public class BtnActivator : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         if (col.gameObject.tag == "Note" && isActive) 
         {
-            pointScript.AddPoints();
-            pointScript.RefreshPoints();
+            gameManager.AddPoints();
+            gameManager.RefreshPoints();
         }
     }
 
