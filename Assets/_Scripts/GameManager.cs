@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -9,11 +10,17 @@ public class GameManager : MonoBehaviour
     private int points;
     private Text pointsText;
 
+    //
+    public AudioSource audioSource;
+    public const float startPitch = 1;
 
     void Start()
     {
         pointsText = GameObject.Find("Points").GetComponent<Text>();
         PlayerPrefs.SetInt("points", points);
+
+        //
+        audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
     }
 
 
@@ -25,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     public void AddPoints()
     {
-        PlayerPrefs.GetInt("points", points+=100);
+        PlayerPrefs.GetInt("points", points += 100);
     }
 
 
@@ -33,4 +40,18 @@ public class GameManager : MonoBehaviour
     {
         pointsText.text = "Points: " + points;
     }
+
+    //
+    IEnumerator LowerPitch() {
+        audioSource.pitch -= 5f * Time.deltaTime;
+
+        yield return new WaitForSeconds(0.25f);
+        audioSource.pitch = 1;
+    }
+
+    public void GameOver() {
+        SceneManager.LoadScene(2);
+    }
+
+
 }

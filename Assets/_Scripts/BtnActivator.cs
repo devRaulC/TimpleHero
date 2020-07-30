@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BtnActivator : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
@@ -18,10 +20,18 @@ public class BtnActivator : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Note" && isActive) 
+        if (col.gameObject.tag == "Note" && isActive)
         {
             gameManager.AddPoints();
             gameManager.RefreshPoints();
+
+        }
+        else if (col.gameObject.tag == "Note" && !isActive)
+        {
+            //StartCoroutine("LowerPitch");
+        }
+        else if (col.gameObject.tag == "GameOVer") {
+            SceneManager.LoadScene(3);
         }
     }
 
@@ -35,4 +45,5 @@ public class BtnActivator : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         isActive = false;
     }
+
 }
